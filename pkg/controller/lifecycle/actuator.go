@@ -89,7 +89,9 @@ func (a *Actuator) Reconcile(ctx context.Context, log logr.Logger, ex *extension
 	if err := synologyClient.Login(); err != nil {
 		return fmt.Errorf("failed to login to Synology NAS: %w", err)
 	}
-	defer synologyClient.Logout()
+	defer func() {
+		_ = synologyClient.Logout()
+	}()
 
 	shootUsername := synology.GenerateShootUsername(shootName, shootNamespace)
 	shootPassword := ""

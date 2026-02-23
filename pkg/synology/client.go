@@ -103,7 +103,9 @@ func (c *Client) Login() error {
 	if err != nil {
 		return fmt.Errorf("login request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -188,7 +190,9 @@ func (c *Client) CreateUser(username, password string) error {
 	if err != nil {
 		return fmt.Errorf("failed to create user: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -254,7 +258,9 @@ func (c *Client) GetUser(username string) (*User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("get user request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {

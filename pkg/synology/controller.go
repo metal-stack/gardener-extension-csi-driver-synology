@@ -6,7 +6,6 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/utils/ptr"
 )
 
 // GenerateControllerDeployment generates the CSI controller deployment
@@ -77,8 +76,8 @@ func GenerateControllerDeployment(namespace string) *appsv1.Deployment {
 								},
 							},
 							SecurityContext: &corev1.SecurityContext{
-								Privileged:               ptr.To(true),
-								AllowPrivilegeEscalation: ptr.To(true),
+								Privileged:               new(true),
+								AllowPrivilegeEscalation: new(true),
 								Capabilities: &corev1.Capabilities{
 									Add: []corev1.Capability{"SYS_ADMIN"},
 								},

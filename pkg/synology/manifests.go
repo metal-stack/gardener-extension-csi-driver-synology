@@ -14,7 +14,6 @@ import (
 	storagev1 "k8s.io/api/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/utils/ptr"
 )
 
 // ClientConfig resembles the Helm chart's client-info.yaml schema.
@@ -346,8 +345,8 @@ func GenerateCSIDriver() *storagev1.CSIDriver {
 			},
 		},
 		Spec: storagev1.CSIDriverSpec{
-			AttachRequired: ptr.To(true),
-			PodInfoOnMount: ptr.To(false),
+			AttachRequired: new(true),
+			PodInfoOnMount: new(false),
 			VolumeLifecycleModes: []storagev1.VolumeLifecycleMode{
 				storagev1.VolumeLifecyclePersistent,
 			},
