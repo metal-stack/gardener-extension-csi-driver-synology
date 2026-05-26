@@ -11,6 +11,9 @@ on:
     branches:
       - main
 
+permissions:
+  packages: write
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
